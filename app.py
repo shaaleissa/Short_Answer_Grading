@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load your pre-trained word2vec model
-model = gensim.models.Word2Vec.load("word2vec_model.model")
+model = gensim.models.Word2Vec.load("Models/word2vec_model.model")
 
 def compute_sentence_vector(sentence):
     vectors = [model.wv[word] for word in sentence if word in model.wv]
