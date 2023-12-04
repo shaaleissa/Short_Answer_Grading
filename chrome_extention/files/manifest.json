@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "Student Grading Extension",
+    "version": "1.0",
+    "description": "Grade student answers using AI models",
+    "browser_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/268107.png",
+        "48": "images/1055441.png",
+        "128": "images/5732163.png"
+      }
+    },
+    "permissions": ["activeTab"]
+  }
+  
