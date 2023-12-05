@@ -5,8 +5,8 @@ from sklearn.ensemble import RandomForestRegressor
 import joblib  # For loading the trained model
 
 # Load pre-trained word2vec and regressor models
-word2vec_model = gensim.models.Word2Vec.load("Models/word2vec_model.model")
-regressor_model = joblib.load("Models/regressor.joblib")
+word2vec_model = gensim.models.Word2Vec.load("Short_Answer_Grading/Models/word2vec_model.model")
+regressor_model = joblib.load("Short_Answer_Grading/Models/regressor.joblib")
 
 def compute_sentence_vector(sentence, model):
     vectors = [model.wv[word] for word in sentence.split() if word in model.wv]
