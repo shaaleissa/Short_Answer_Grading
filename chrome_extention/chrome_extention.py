@@ -54,13 +54,6 @@ def W2V_grade():
         'predicted_grade': grade
     })
 
-# def predict_grade(ref_answer, student_answer):
-#     ref_vector = compute_sentence_vector(ref_answer)
-#     student_vector = compute_sentence_vector(student_answer)
-#     combined_vector = np.concatenate([ref_vector, student_vector])
-#     predicted_grade = regressor_model.predict([combined_vector])[0]
-#     return predicted_grade
-
 # Load pre-trained word2vec and regressor models
 regressor_model = joblib.load("/Users/shahadaleissa/NLP_project/Models/regressor.joblib")
 
