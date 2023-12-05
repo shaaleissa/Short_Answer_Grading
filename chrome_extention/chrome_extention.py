@@ -4,12 +4,12 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
 import joblib
-
+from openai import OpenAI
 
 app = Flask(__name__)
 CORS(app)
 
-model = gensim.models.Word2Vec.load("Short_Answer_Grading/Models/word2vec_model.model")
+model = gensim.models.Word2Vec.load("/Users/shahadaleissa/NLP_project/Models/word2vec_model.model")
 
 def compute_sentence_vector(sentence):
     vectors = [model.wv[word] for word in sentence if word in model.wv]
@@ -62,7 +62,7 @@ def W2V_grade():
 #     return predicted_grade
 
 # Load pre-trained word2vec and regressor models
-regressor_model = joblib.load("Short_Answer_Grading/Models/regressor.joblib")
+regressor_model = joblib.load("/Users/shahadaleissa/NLP_project/Models/regressor.joblib")
 
 @app.route('/reference_grade', methods=['POST'])
 def reference_grade():
@@ -76,10 +76,43 @@ def reference_grade():
     student_answer_vector = compute_sentence_vector(student_answer.split())
     
     combined_vector = np.concatenate([ref_answer_vector, student_answer_vector])
+
     
     # Calculate the grade
     predicted_grade = regressor_model.predict([combined_vector])[0]
     
+    return jsonify({
+        'reference_answer': reference_answer,
+        'student_answer': student_answer,
+        'predicted_grade': predicted_grade
+    })
+
+@app.route('/gpt_grade', methods=['POST'])
+
+def gbt_grade():
+    with open('/Users/shahadaleissa/NLP_project/hidden.txt') as f:
+        key = f.read()
+    client = OpenAI(api_key=key)
+
+    # Extract data from request
+    data = request.json
+    question = data['question']
+    reference_answer = data['reference_answer']
+    student_answer = data['student_answer']
+    
+    response = client.chat.completions.create(
+    model="ft:gpt-3.5-turbo-0613:personal::8MwNH76d",
+    messages= [
+    {"role": "system", "content": "You are a tutor assistant."}, 
+    {"role": "user", "content": "What is the answer to this question: f{question}}"}, 
+    {"role": "assistant", "content": "f{reference_answer}"}, 
+    {"role": "user", "content": "f{student_answer}"}
+  ]
+)
+
+    
+    # Calculate the grade
+    predicted_grade = response.choices[0].message.content
     return jsonify({
         'reference_answer': reference_answer,
         'student_answer': student_answer,

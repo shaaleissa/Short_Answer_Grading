@@ -13,13 +13,21 @@
     <label class="btn btn-outline-primary" for="Word2Vec">Word2Vec</label>
   
     <input type="radio" class="btn-check" name="btnradio" id="Regresson" autocomplete="off">
-    <label class="btn btn-outline-primary" for="Regresson">Regresson</label>
+    <label class="btn btn-outline-primary" for="Regresson">Regressor</label>
+
+    <input type="radio" class="btn-check" name="btnradio" id="GPT" autocomplete="off">
+    <label class="btn btn-outline-primary" for="GPT">GPT</label>
   </div>
 
   <form  id="grading-form">
     <div class="">
       <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Reference Answer" id="reference-answer" style="height: 100px"></textarea>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Question" id="question" style="height: 60px"></textarea>
+          <label for="question">Question</label>
+          </div>
+          
+        <textarea class="form-control" placeholder="Reference Answer" id="reference-answer" style="height: 60px"></textarea>
         <label for="reference-answer">Reference Answer</label>
         <!-- <div class="mt-5invalid-feedback">
           Please full the reference answer.
@@ -28,9 +36,10 @@
       
 
       <div class="form-floating">
-        <textarea class="form-control" placeholder="student Answer" id="student-answer" style="height: 100px"></textarea>
+        <textarea class="form-control" placeholder="student Answer" id="student-answer" style="height: 60px"></textarea>
         <label for="student-answer">student Answer</label>
         
+
       </div>
     </div>
     <button type="submit" class="btn btn-outline-primary">Grade</button>
