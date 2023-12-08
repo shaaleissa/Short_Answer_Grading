@@ -55,6 +55,7 @@ def W2V_grade():
     })
 
 # Load pre-trained word2vec and regressor models
+# regressor_model = joblib.load("/Users/shahadaleissa/NLP_project/Models/regressor.joblib")
 regressor_model = joblib.load("/Users/shahadaleissa/NLP_project/Models/regressor.joblib")
 
 @app.route('/reference_grade', methods=['POST'])
@@ -102,8 +103,6 @@ def gbt_grade():
     {"role": "user", "content": "f{student_answer}"}
   ]
 )
-
-    
     # Calculate the grade
     predicted_grade = response.choices[0].message.content
     return jsonify({
@@ -114,4 +113,5 @@ def gbt_grade():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #change port
+    app.run(debug=True, port=7700)

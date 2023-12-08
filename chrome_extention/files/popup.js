@@ -79,7 +79,7 @@ document.getElementById('grading-form').addEventListener('submit', function (e) 
   if (document.getElementById('Word2Vec').checked) {
     console.log("Word2Vec!");
     // Example: POST request to your Flask API
-    fetch('http://127.0.0.1:5000/W2V_grade', {
+    fetch('http://127.0.0.1:7700/W2V_grade', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ document.getElementById('grading-form').addEventListener('submit', function (e) 
   else if (document.getElementById('Regresson').checked) {
     console.log("Regresson!");
     // Example: POST request to your Flask API
-    fetch('http://127.0.0.1:5000/reference_grade', {
+    fetch('http://127.0.0.1:7700/reference_grade', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ document.getElementById('grading-form').addEventListener('submit', function (e) 
   else if (document.getElementById('GPT').checked) {
     console.log("GPT!");
     // Example: POST request to your Flask API
-    fetch('http://127.0.0.1:5000/gpt_grade', {
+    fetch('http://127.0.0.1:7700/gpt_grade', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
